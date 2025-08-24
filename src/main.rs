@@ -1,4 +1,3 @@
-use std::fmt::format;
 use bracket_lib::prelude::*;
 
 enum GameMode {
@@ -98,9 +97,11 @@ impl State {
     }
 
     fn restart(&mut self) {
-        self.player = Player::new(5, 25);
-        self.frame_time = 0.0;
-        self.mode = GameMode::Playing;
+        self.player= Player::new(5, 25);
+        self.frame_time= 0.0;
+        self.mode= GameMode::Playing;
+        self.obstacle= Obstacle::new(SCREEN_WIDTH, 0);
+        self.score= 0;
     }
 }
 
@@ -113,8 +114,8 @@ struct Player {
 impl Player {
     fn new(x: i32, y: i32) -> Self {
         Player {
-            x: 0,
-            y: 0,
+            x,
+            y,
             velocity: 0.0,
         }
     }
