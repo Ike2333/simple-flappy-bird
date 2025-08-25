@@ -97,14 +97,13 @@ impl State {
             }
         }
 
-        // 通过时创建下一个障碍物
+        // 创建下一个障碍物, 移除第一个障碍物
         if let Some(last) = self.obstacles.last() {
             if self.player.x > last.x - DIST_BETWEEN && self.obstacles.len() < 2 {
                 self.obstacles
                     .push(Obstacle::new(last.x + DIST_BETWEEN, self.score));
             }
         }
-
         if let Some(first) = self.obstacles.first() {
             let screen_x = first.x - self.player.x + PLAYER_SCREEN_X;
             if screen_x < 0 {
