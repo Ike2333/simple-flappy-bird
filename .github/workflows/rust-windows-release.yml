@@ -3,7 +3,7 @@ name: Windows Release
 on:
   push:
     tags:
-      - 'v*'  # 仅在推送 tag 时触发，如 v1.0.0
+      - 'v*'  # 仅在推送 tag 时触发
 
 jobs:
   build-windows:
@@ -22,19 +22,9 @@ jobs:
       - name: Build release binary
         run: cargo build --release
 
-      - name: Rename binary for release
-        run: |
-          Rename-Item target\release\simple-flappy-bird.exe simple-flappy-bird-windows.exe
-
-      - name: Generate checksum
-        run: |
-          Get-FileHash simple-flappy-bird-windows.exe -Algorithm SHA256 | Format-List > checksum.txt
-
       - name: Upload release to GitHub
         uses: softprops/action-gh-release@v1
         with:
-          files: |
-            simple-flappy-bird-windows.exe
-            checksum.txt
+          files: target/release/*.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
