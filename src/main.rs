@@ -83,7 +83,7 @@ impl State {
         }
         self.player.render(ctx);
         ctx.print(0, 0, "Press space to flap");
-        ctx.print(0, 1, &format!("Score: {}", self.score));
+        ctx.print(0, 2, &format!("Score: {}", self.score));
         for obs in self.obstacles.iter_mut() {
             obs.render(ctx, self.player.x);
 
