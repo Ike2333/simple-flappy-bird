@@ -3,7 +3,7 @@ name: Windows Release
 on:
   push:
     tags:
-      - 'v*'  # 仅在推送 tag 时触发
+      - 'v*'
 
 jobs:
   build-windows:
@@ -22,9 +22,12 @@ jobs:
       - name: Build release binary
         run: cargo build --release
 
+      - name: Rename binary
+        run: Rename-Item target\release\flippy-bird.exe simple-flappy-bird-windows.exe
+
       - name: Upload release to GitHub
         uses: softprops/action-gh-release@v1
         with:
-          files: target/release/*.exe
+          files: simple-flappy-bird-windows.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
